@@ -1,0 +1,45 @@
+<nav class="top-bar">
+  <ul class="title-area">
+    <!-- Title Area -->
+    <li class="name">
+      <h1><a href="#">Move My Words</a></h1>
+    </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <% if user_signed_in? %>
+        <li><a href="#">Signed in as <%= current_user.email %></a></li>
+        
+        <li class="divider hide-for-small"></li>
+        <li class="has-dropdown"><a href="#">Main Item 4</a>
+
+          <ul class="dropdown">
+            <li><label>Dropdown Level 1 Label</label></li>
+            <li><a href="#">Dropdown Level 1b</a></li>
+            <li><a href="#">Dropdown Level 1c</a></li>
+            <li class="divider"></li>
+            <li><label>Dropdown Level 1 Label</label></li>
+            <li><a href="#">Dropdown Level 1d</a></li>
+            <li><a href="#">Dropdown Level 1e</a></li>
+            <li><a href="#">Dropdown Level 1f</a></li>
+          </ul>
+        </li>
+
+        <li><%= link_to "Log Out", destroy_user_session_path %></li>
+
+      <% else %>
+        <li class="divider"></li>
+        <li class="divider show-for-small"></li>
+        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <li class="divider"></li>
+        <li class="divider show-for-small"></li>
+        <li><%= link_to "Log In", new_user_session_path %></li>
+      <% end %>
+
+    </ul>
+  </section>
+</nav>

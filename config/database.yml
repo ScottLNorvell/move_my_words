@@ -1,0 +1,30 @@
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: move_my_words_development
+  pool: 5
+  username: scottsMac
+  host: localhost
+  password:
+
+test: &test
+  adapter: postgresql
+  encoding: unicode
+  database: move_my_words_test
+  pool: 5
+  username: scottsMac
+  host: localhost
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: move_my_words_production
+  pool: 5
+  username: scottsMac
+  host: localhost
+  password:
+
+cucumber:
+  <<: *test
