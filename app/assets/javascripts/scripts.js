@@ -1,4 +1,4 @@
-var w = 900,
+var w = 960,
     h = 400,
     nodes = [],
     node;
@@ -26,14 +26,6 @@ var drag = force.drag()
 $(function() {
   pushNode('Enter Some Text!', 'y')
 
-  // $('#tf').on('submit', function(event) {
-  //   event.preventDefault();
-  //   var t = $('#ti');
-  //   pushNode(t.val());
-  //   t.val('')
-
-  // })
-
   $('#ti').keyup(function(e) {
     // console.log("keyCode = ", e.keyCode)
     if (e.keyCode == 32 || e.keyCode == 13) {
@@ -50,7 +42,7 @@ function pushNode(name, placeholder) {
 
   // remove placeholder if it exists!
   if (nodes[0] && nodes[0].placeholder == 'y') {
-    console.log('shifting!')
+    // console.log('shifting!')
     nodes.shift()
   }
 

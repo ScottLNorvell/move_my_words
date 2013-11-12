@@ -1,0 +1,29 @@
+<div id="signup-modal" class="reveal-modal">
+	<h2>Sign up</h2>
+
+	<%= form_for @user, :url => user_registration_path do |f| %>
+
+	<div class="input-wrapper">
+	  	<%= f.label :email %>
+	  	<%= f.email_field :email, :autofocus => true %>
+	</div>
+
+
+	  <div>
+	  	<%= f.label :password %>
+	  	<%= f.password_field :password %>
+	  </div>
+
+	  <div>
+	  	<%= f.label :password_confirmation %>
+	  	<%= f.password_field :password_confirmation %>
+	  </div>
+
+	  <div><%= f.submit "Sign up" %></div>
+	<% end %>
+
+	<a href="#" data-reveal-id="signin-modal">Log In!</a>
+
+
+	<a class="close-reveal-modal">&#215;</a>
+</div>

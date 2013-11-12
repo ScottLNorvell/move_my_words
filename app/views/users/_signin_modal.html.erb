@@ -1,0 +1,17 @@
+<div id="signin-modal" class="reveal-modal">
+	<h2>Log in</h2>
+
+	<%= form_for @user, :url => user_session_path, html: {data: { abide: true }} do |f| %>
+	  <div><%= f.label :email %><br />
+	  <%= f.email_field :email, :autofocus => true %></div>
+
+	  <div><%= f.label :password %><br />
+	  <%= f.password_field :password %></div>
+
+	  <div><%= f.submit "Log in" %></div>
+	<% end %>
+
+	<a href="#" data-reveal-id="signup-modal">Sign Up!</a>
+
+	<a class="close-reveal-modal">&#215;</a>
+</div>
