@@ -1,3 +1,5 @@
+var move_my_post = ""
+
 var w = 960,
     h = 400,
     nodes = [],
@@ -24,19 +26,64 @@ var drag = force.drag()
     .on("dragstart", dragstart);
 
 $(function() {
-  pushNode('Enter Some Text!', 'y')
+  // initialize SVG with placeholder text (will probably have to wrap this)
+  pushNode(placeholder_text, 'y')
 
-  $('#ti').keyup(function(e) {
-    // console.log("keyCode = ", e.keyCode)
+  // push words into vis as they are typed(either)
+  $('#enter-text').keyup(function(e) {
+    console.log("e.keyCode = ", e.keyCode)
     if (e.keyCode == 32 || e.keyCode == 13) {
       var self = $(this);
-      pushNode(self.val().trim());
-      self.val('');
+      var word = self.val();
+      if (word.trim()) {
+        console.log('adding ' + word)
+        move_my_post += word
+        if (e.keyCode == 13) {
+          move_my_post += " "
+        }
+        pushNode(word.trim());
+        self.val('');
+      }      
     }
   });
 
+  $('#save-button').on('click', function() {
+    if (!user_signed_in) {
+      $('#signup-modal').foundation('reveal', 'open');
+      localStorage.setItem('move_my_post', move_my_post);
+    } else {
+      // save the blog post!
+      bringInForm();
+    }
+  });
+
+  $('#old-school-button').on('click', function() {
+    if (!user_signed_in) {
+      $('#signup-modal').foundation('reveal', 'open');
+    } else {
+      // drop down form for post with
+      bringInForm(); 
+    }
+  });
+
+  $('#new_move_my_post').on('submit', function(e) {
+    e.preventDefault();
+    var self = $(this);
+    $.ajax("/move_my_posts",{
+      data: self.serialize(),
+      type: "POST"
+    }).done(function(data) {
+      console.log(data);
+    });
+    $('#old-school-modal').foundation('reveal', 'close');
+  })
+
 })
 
+function bringInForm() {
+  $('#move-my-post-content').val(move_my_post);
+  $('#old-school-modal').foundation('reveal', 'open');
+}
 
 function pushNode(name, placeholder) {
 

@@ -1,0 +1,12 @@
+<% provide :title, current_user == @user ? "Home" : @user.name || @user.email %>
+
+<div class="row">
+	<div class="large-3 columns">
+		<h3><%= @user.name || @user.email %></h3>
+		<h5 class="subheader">Blogs about ___ and ___.</h5>
+		<%= gravatar_for @user, size: 50 %>
+	</div>
+	<div class="large-9 columns">
+		<%= render 'shared/word_block' %>
+	</div>
+</div>

@@ -17,6 +17,11 @@
 
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <script>
+      // tell javascript when
+      var user_signed_in = <%= user_signed_in? %>
+      var placeholder_text = "<%= @placeholder || 'Enter Some Text!' %>"
+    </script>
     <%= csrf_meta_tags %>
   </head>
 
@@ -25,9 +30,16 @@
     <%# render 'layouts/flash' %>
 
     <%= yield %>
+    
     <% if @user.present? %>
     <%= render 'users/signin_modal' %>
     <%= render 'users/signup_modal' %>
+    <% end %>
+    
+    <%= render 'layouts/about_modal' %>
+    
+    <% if user_signed_in? %>
+    <%= render 'layouts/old_school_modal' %>
     <% end %>
     <%= javascript_include_tag "application" %>
   </body>

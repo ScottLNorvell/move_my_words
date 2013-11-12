@@ -1,0 +1,18 @@
+<div id="old-school-modal" class="reveal-modal">
+	<h2>OLD-School form!</h2>
+	<h4 class="subheader">Edit your post, then click Save Post!</h4>
+
+	<%= form_for @move_my_post do |f| %>
+	
+	<%= f.label :title %>
+	<%= f.text_field :title, placeholder: "enter a title" %>
+
+	<%= f.label :content  %>
+	<%= f.text_area :content, placeholder: "content", id: "move-my-post-content" %>
+	
+	<%= f.submit "Save Post!", class: "small button" %>
+
+	<% end %>
+
+	<a class="close-reveal-modal">&#215;</a>
+</div>
