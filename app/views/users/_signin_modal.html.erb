@@ -2,10 +2,10 @@
 	<h2>Log in</h2>
 
 	<%= form_for @new_user, :url => user_session_path, html: {data: { abide: true }} do |f| %>
-	  <div><%= f.label :email %><br />
+	  <div><%= f.label :email %>
 	  <%= f.email_field :email, :autofocus => true %></div>
 
-	  <div><%= f.label :password %><br />
+	  <div><%= f.label :password %>
 	  <%= f.password_field :password %></div>
 
 	  <div><%= f.submit "Log in", class: "small button radius" %></div>

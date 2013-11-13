@@ -7,5 +7,15 @@ module ApplicationHelper
 	  else
 	  	"#{base_title} | #{page_title}"
 	  end
-	end	
+	end
+
+	def name_or_email(user)
+		user.name || user.email.split("@").first
+	end
+
+	def title_or_not(move_my_post)
+		move_my_post.title || "Untitled"
+		
+	end
+
 end

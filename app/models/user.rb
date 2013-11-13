@@ -9,4 +9,10 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :move_my_posts, dependent: :destroy
+  before_save :name_from_email
+
+  private 
+  	def name_from_email
+  		self.name ||= email.split("@").first
+  	end
 end

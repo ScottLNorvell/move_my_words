@@ -21,6 +21,8 @@
       // tell javascript when
       var user_signed_in = <%= user_signed_in? %>
       var placeholder_text = "<%= @placeholder || 'Enter Some Text!' %>"
+      var move_my_post = "<%= @move_my_post.content.html_safe rescue '' %>"
+      var game = "<%= @game || 'template' %>"
     </script>
     <%= csrf_meta_tags %>
   </head>
@@ -31,15 +33,21 @@
 
     <%= yield %>
     
+    <% if @user.present? %>
+    <%= render 'users/edit_user_modal' %>
+    <% end %>
+
     <% if @new_user.present? %>
     <%= render 'users/signin_modal' %>
     <%= render 'users/signup_modal' %>
     <% end %>
     
     <%= render 'layouts/about_modal' %>
+
+    <% if user_signed_in? && @new_move_my_post.present? %>
     
-    <% if user_signed_in? %>
     <%= render 'layouts/old_school_modal' %>
+    
     <% end %>
     <%= javascript_include_tag "application" %>
   </body>

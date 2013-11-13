@@ -1,0 +1,13 @@
+<% provide :title, title_or_not( @move_my_post ) %>
+<div class="row">
+	<div class="large-12 columns">
+		<h1 class="my-title"><%= title_or_not @move_my_post %></h1>
+		<h5 class="subheader">You may have been moved by <%= name_or_email @move_my_post.user %>'s words. Why not move them back?</h5>
+	</div>	
+</div>
+
+<div class="row">
+	<div class="large-12 columns">
+		<%= render partial: 'shared/word_block', locals: { editable: false } %>
+	</div>
+</div>

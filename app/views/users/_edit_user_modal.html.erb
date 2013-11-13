@@ -1,0 +1,29 @@
+<div id="edit-user-modal" class="reveal-modal">
+	<h2>Update your info!</h2>
+
+	<%= form_for @user do |f| %>
+	<div>
+	  	<%= f.label :email %>
+	  	<%= f.email_field :email, :autofocus => true %>
+	</div>
+
+	<div>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+	</div>
+
+	<div>
+		<%= f.label :bio %>
+		<%= f.text_area :bio %>
+	</div>
+
+	<div>
+		<%= f.submit "UPDATE", class: "small button radius" %>
+	</div>
+
+
+	<% end %>
+
+
+	<a class="close-reveal-modal">&#215;</a>
+</div>

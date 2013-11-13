@@ -3,7 +3,7 @@ class MoveMyPostsController < ApplicationController
 	def show
 		@move_my_post = MoveMyPost.find params[:id]
 		@game = params[:game]
-		render json: { post: @move_my_post, game: @game }
+		# render json: { post: @move_my_post, game: @game }
 	end
 
 	def create
