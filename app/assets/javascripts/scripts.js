@@ -1,49 +1,48 @@
 var mmw = mmw || {};
 
-mmw.move_my_post = ""
+mmw.move_my_post = "";
+mmw.nodes = mmw.nodes || [];
 
 // hard-coding w and height! We'll do this programmatically moving forward!
 mmw.WIDTH = $('#word-block').width();
 mmw.HEIGHT =  mmw.WIDTH * 5/12;
-mmw.nodes = [];
  
 mmw.svg = d3.select("#word-block").append("svg")
     .attr("width", mmw.WIDTH)
     .attr("height", mmw.HEIGHT);
  
-// var text = svg.selectAll("text");
-
-var force = d3.layout.force()
+mmw.force = d3.layout.force()
     .charge(-30)
-    .nodes(nodes)
+    .nodes(mmw.nodes)
     .links([])
-    .size([w, h]);
- 
-force.on("tick", function(e) {
-  svg.selectAll("text")
+    .size([mmw.WIDTH, mmw.HEIGHT]);
+
+mmw.force.on("tick", function(e) {
+  mmw.svg.selectAll("text")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 });
 
-var drag = force.drag()
-    .on("dragstart", dragstart);
+mmw.drag = mmw.force.drag()
+    .on("dragstart", mmw.dragstart);
 
 $(function() {
   // initialize SVG with placeholder text (will probably have to wrap this)
-  pushNode(placeholder_text, 'y')
+  mmw.pushNode(placeholder_text, 'y')
 
-  // push words into vis as they are typed(either)
+  // push words into vis as they are typed
+  // (either by pressing enter [13] or space [32])
   $('#enter-text').keyup(function(e) {
-    console.log("e.keyCode = ", e.keyCode)
+    // console.log("e.keyCode = ", e.keyCode)
     if (e.keyCode == 32 || e.keyCode == 13) {
       var self = $(this);
       var word = self.val();
       if (word.trim()) {
-        console.log('adding ' + word)
-        move_my_post += word
+        // console.log('adding ' + word)
+        mmw.move_my_post += word
         if (e.keyCode == 13) {
-          move_my_post += " "
+          mmw.move_my_post += " "
         }
-        pushNode(word.trim());
+        mmw.pushNode(word.trim());
         self.val('');
       }      
     }
@@ -52,7 +51,7 @@ $(function() {
   $('#save-button').on('click', function() {
     if (!user_signed_in) {
       $('#signup-modal').foundation('reveal', 'open');
-      localStorage.setItem('move_my_post', move_my_post);
+      localStorage.setItem('move_my_post', mmw.move_my_post);
     } else {
       // save the blog post!
       bringInForm();
@@ -62,6 +61,7 @@ $(function() {
   $('#old-school-button').on('click', function() {
     if (!user_signed_in) {
       $('#signup-modal').foundation('reveal', 'open');
+      localStorage.setItem('move_my_post', mmw.move_my_post);
     } else {
       // drop down form for post with
       bringInForm(); 
@@ -75,6 +75,7 @@ $(function() {
       data: self.serialize(),
       type: "POST"
     }).done(function(data) {
+      // this should update DOM!
       console.log(data);
     });
     $('#old-school-modal').foundation('reveal', 'close');
@@ -87,22 +88,22 @@ function bringInForm() {
   $('#old-school-modal').foundation('reveal', 'open');
 }
 
-function pushNode(name, placeholder) {
+mmw.pushNode = function(name, placeholder) {
 
   // remove placeholder if it exists!
-  if (nodes[0] && nodes[0].placeholder == 'y') {
-    // console.log('shifting!')
-    nodes.shift()
+  if (mmw.nodes[0] && mmw.nodes[0].placeholder == 'y') {
+    mmw.nodes.shift()
   }
 
-  nodes.push({
+  mmw.nodes.push({
     name: name,
     color: "steelblue",
     placeholder: placeholder || 'n'
   });
-   
-  var text = svg.selectAll('text')
-      .data(force.nodes(), function(d) { return d.index } );
+  
+  // *** MAKE TEXT and object var! ***
+  var text = mmw.svg.selectAll('text')
+      .data(mmw.force.nodes(), function(d) { return d.index } );
 
   text.enter().append("text")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
@@ -114,29 +115,27 @@ function pushNode(name, placeholder) {
       .style("cursor", "pointer")
       .attr("id", function(d,i) { return "text-" + i; })
       .attr("text-anchor", "middle")
-      .on('click', function(d,i) { console.log("width = ", getWidth(d,i)); })
-      .on('dblclick', function(d,i) { unFix(d,i); })
-      .call(drag)
+      .on('dblclick', function(d,i) { mmw.unFix(d,i); })
+      .call(mmw.drag)
   
   text.exit().remove()
 
    // Restart the layout.
-  force.start();
+  mmw.force.start();
  
-}//, 1000);
+}
 
-function dragstart(d) {
+mmw.dragstart = function(d) {
   d.fixed = true;
   d3.select(this).style("fill", "red");
 }
 
-function unFix(d,i) {
-  console.log(d);
+mmw.unFix = function(d,i) {
   d.fixed = false;
   d3.select("#text-" + i).style("fill", d.color)
   force.start();
 }
 
-function getWidth(d,i) {
+mmw.getWidth = function(d,i) {
   return d3.select("#text-" + i).node().getBBox();
 }
