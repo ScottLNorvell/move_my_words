@@ -31,7 +31,7 @@
 
     <%= yield %>
     
-    <% if @user.present? %>
+    <% if @new_user.present? %>
     <%= render 'users/signin_modal' %>
     <%= render 'users/signup_modal' %>
     <% end %>

@@ -2,11 +2,26 @@
 
 <div class="row">
 	<div class="large-3 columns">
+		<%= gravatar_for @user, size: 300 %>
 		<h3><%= @user.name || @user.email %></h3>
 		<h5 class="subheader">Blogs about ___ and ___.</h5>
-		<%= gravatar_for @user, size: 50 %>
+		<p><strong>ABOUT</strong>: <%= @user.bio || "-no-bio-yet-" %></p>
+
 	</div>
 	<div class="large-9 columns">
-		<%= render 'shared/word_block' %>
+		<%= render partial: 'shared/word_block', locals: { editable: user_signed_in? } %>
 	</div>
 </div>
+<% if @user.move_my_posts.any? %>
+<div class="row">
+	<div class="large-12 columns">
+		<%= render @user.move_my_posts %>
+	</div>
+</div>
+<% else %>
+<div class="row">
+	<div class="large-12 columns">
+		<h4>No Posts!</h4>
+	</div>
+</div>
+<% end %>

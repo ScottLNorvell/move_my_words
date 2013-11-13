@@ -1,13 +1,15 @@
-var move_my_post = ""
+var mmw = mmw || {};
 
-var w = 960,
-    h = 400,
-    nodes = [],
-    node;
+mmw.move_my_post = ""
+
+// hard-coding w and height! We'll do this programmatically moving forward!
+mmw.WIDTH = $('#word-block').width();
+mmw.HEIGHT =  mmw.WIDTH * 5/12;
+mmw.nodes = [];
  
-var svg = d3.select("#word-block").append("svg")
-    .attr("width", w)
-    .attr("height", h);
+mmw.svg = d3.select("#word-block").append("svg")
+    .attr("width", mmw.WIDTH)
+    .attr("height", mmw.HEIGHT);
  
 // var text = svg.selectAll("text");
 

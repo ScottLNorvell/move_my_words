@@ -1,0 +1,12 @@
+<h4><%= move_my_post.title || "Untitled" %></h4>
+<!-- <h6 class="subheader">About ___ and ___.</h6> -->
+
+<blockquote><%= move_my_post.content %></blockquote>
+
+<div>
+	GAMES:
+	<%= link_to "Fridge Magnets!", posts_game_path( move_my_post, 'fridge_magnets' ), class: "tiny button secondary radius" %> 
+	<%= link_to "Web Words!", posts_game_path( move_my_post, 'web_words' ), class: "tiny button secondary radius" %> 
+	<!-- <button class="tiny button secondary radius">Fridge Magnets!</button>
+	<button class="tiny button secondary radius">Web Words!</button> -->
+</div>

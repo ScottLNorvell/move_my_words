@@ -1,7 +1,7 @@
 <div id="signin-modal" class="reveal-modal">
 	<h2>Log in</h2>
 
-	<%= form_for @user, :url => user_session_path, html: {data: { abide: true }} do |f| %>
+	<%= form_for @new_user, :url => user_session_path, html: {data: { abide: true }} do |f| %>
 	  <div><%= f.label :email %><br />
 	  <%= f.email_field :email, :autofocus => true %></div>
 
