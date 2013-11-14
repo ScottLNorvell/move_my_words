@@ -13,6 +13,9 @@
     <ul class="left">
       <li class="divider hide-for-small"></li>
       <li><a href="#" data-reveal-id="about-modal" >About</a></li>
+      <% if @game.present? %>
+      <li><a href="#" data-reveal-id="instructions-modal" ><%= @game.name %> Instructions</a></li>
+      <% end %>
       <li><%= link_to "Users", users_path %></li>
     </ul><!-- End Left Nav Section -->
 
@@ -21,22 +24,24 @@
 
       <%# User info if applicable %>
       <% if user_signed_in? %>
-        <li><a href="#">Signed in as <%= current_user.email %></a></li>
+        <li><a href="#">Signed in as <span class="user-email"><%= current_user.email %></span></a></li>
         
-        <%# Account Dropdown Box! %>
-        <%# not sure what's going to be in this but we'll see! %>
         <li class="divider hide-for-small"></li>
         <li class="has-dropdown"><a href="#">Account</a>
           <ul class="dropdown">
-            <li><label>Profile</label></li>
-            <li><a href="#" data-reveal-id="edit-user-modal">Edit</a></li>
-            <li><a href="#" data-reveal-id="old-school-modal">New Move My Word</a></li>
-            <li><a href="#">Update</a></li>
             <li class="divider"></li>
-            <li><label>Play</label></li>
-            <li><a href="#">Activity 1</a></li>
-            <li><a href="#">Activity 2</a></li>
-            <li><a href="#">Activity 3</a></li>
+            <li><label>You</label></li>
+            <li><%= link_to "Profile", user_path( current_user ) %></li>
+
+            <% if @user.present? %>
+            <li><a href="#" data-reveal-id="edit-user-modal">Edit</a></li>
+            <% end %>
+            
+            <li><a href="#" data-reveal-id="old-school-modal">New Move My Words</a></li>
+            <li class="divider"></li>
+            <li><label>Links</label></li>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Users", users_path %></li>
           </ul>
         </li>
 

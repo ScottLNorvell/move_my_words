@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131112160553) do
+ActiveRecord::Schema.define(:version => 20131113215054) do
+
+  create_table "games", :force => true do |t|
+    t.string   "name"
+    t.text     "instructions"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "slug"
+  end
+
+  add_index "games", ["name"], :name => "index_games_on_name"
 
   create_table "move_my_posts", :force => true do |t|
     t.string   "title"

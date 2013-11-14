@@ -22,7 +22,7 @@
       var user_signed_in = <%= user_signed_in? %>
       var placeholder_text = "<%= @placeholder || 'Enter Some Text!' %>"
       var move_my_post = "<%= @move_my_post.content.html_safe rescue '' %>"
-      var game = "<%= @game || 'template' %>"
+      var game = "<%= @game.slug rescue 'template' %>"
     </script>
     <%= csrf_meta_tags %>
   </head>
@@ -48,6 +48,12 @@
     
     <%= render 'layouts/old_school_modal' %>
     
+    <% end %>
+
+    <% if @game.present? %>
+    
+    <%= render 'layouts/instructions_modal' %>
+
     <% end %>
     <%= javascript_include_tag "application" %>
   </body>
