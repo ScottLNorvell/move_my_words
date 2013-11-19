@@ -4,7 +4,6 @@ class MoveMyPostsController < ApplicationController
 		@move_my_post = MoveMyPost.find params[:id]
 		@new_move_my_post = MoveMyPost.new
 		@game = Game.find_by_slug params[:game]
-		# render json: { post: @move_my_post, game: @game }
 	end
 
 	def create
@@ -14,7 +13,6 @@ class MoveMyPostsController < ApplicationController
 			format.html { render move_my_post }
 			format.json { render json: { post: move_my_post, html: html_string } }
 		end
-		# render json: move_my_post
 	end
 
 	def update

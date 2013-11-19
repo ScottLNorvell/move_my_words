@@ -165,9 +165,6 @@ mmw.updateText = function() {
   text.enter().append("text")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
       .text(function(d) { return d.name; })
-      // *** Could move most of this to stylesheet! *** 
-      // .style("font-size", "30px")
-      // .style("fill", "steelblue")
       .style("stroke", "black")
       .style("stroke-width", "1px")
       .style("cursor", "pointer")
