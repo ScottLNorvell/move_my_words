@@ -8,7 +8,6 @@ class WelcomeController < ApplicationController
 			render 'users/show'
 		else
 			@new_user = User.new
-			# @placeholder = "Enter Some Text!"
 		end
 	end
 end
