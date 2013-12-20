@@ -4,6 +4,9 @@ class MoveMyPostsController < ApplicationController
 		@move_my_post = MoveMyPost.find params[:id]
 		@new_move_my_post = MoveMyPost.new
 		@game = Game.find_by_slug params[:game]
+		unless user_signed_in?
+			@new_user = User.new
+		end
 	end
 
 	def create
@@ -18,6 +21,12 @@ class MoveMyPostsController < ApplicationController
 	def update
 		move_my_post = MoveMyPost.find params[:id]
 		move_my_post.update_attributes params[:move_my_post]
+		render json: move_my_post
+	end
+
+	def destroy
+		move_my_post = MoveMyPost.find params[:id]
+		move_my_post.destroy
 		render json: move_my_post
 	end
 

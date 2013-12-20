@@ -1,7 +1,10 @@
 
 class UsersController < ApplicationController
 	def index
-		@users = User.all 
+		@users = User.all
+		unless user_signed_in?
+			@new_user = User.new
+		end 
 	end
 
 	def show

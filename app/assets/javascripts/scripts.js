@@ -93,6 +93,20 @@ $(function() {
     });
   });
 
+  $('.delete-mmp').click(function(e) {
+    e.preventDefault();
+    var self = $(this);
+    var mmp_div = self.closest('div');
+    // add modal for confirmation!
+    $.ajax({
+      url: self.attr('href'),
+      type: 'DELETE'
+    }).done(function(data) {
+      console.log(data);
+      mmp_div.remove();
+    })
+  })
+
 });
 
 // brings in old school modal form!

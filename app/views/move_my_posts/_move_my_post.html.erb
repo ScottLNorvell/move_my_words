@@ -1,10 +1,22 @@
-<h4><%= title_or_not move_my_post %> <small>created <%= time_ago_in_words move_my_post.created_at %> ago</small> </h4>
-<!-- <h6 class="subheader">About ___ and ___.</h6> -->
+<div id="mmp-<%= move_my_post.id %>">
+	<h4>
+		<%= title_or_not move_my_post %> 
+		<small>created <%= time_ago_in_words move_my_post.created_at %> ago
 
-<blockquote><%= move_my_post.content %></blockquote>
+	<% if current_user == move_my_post.user %>
+		<%= link_to "DELETE", move_my_post_path( move_my_post ), class: "tiny button alert radius delete-mmp" %> 
+	<% end %>
+		</small> 
+	</h4>
 
-<div>
-	GAMES:
-	<%= link_to "Fridge Magnets!", posts_game_path( move_my_post, 'fridge_magnets' ), class: "tiny button secondary radius" %> 
-	<%= link_to "Web Words!", posts_game_path( move_my_post, 'web_words' ), class: "tiny button secondary radius" %>
+
+	<!-- <h6 class="subheader">About ___ and ___.</h6> -->
+
+	<blockquote><%= move_my_post.content %></blockquote>
+
+	<div>
+		GAMES:
+		<%= link_to "Fridge Magnets!", posts_game_path( move_my_post, 'fridge_magnets' ), class: "tiny button secondary radius" %> 
+		<%= link_to "Web Words!", posts_game_path( move_my_post, 'web_words' ), class: "tiny button secondary radius" %>
+	</div>
 </div>
