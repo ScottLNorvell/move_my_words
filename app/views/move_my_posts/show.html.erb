@@ -2,6 +2,13 @@
 <div class="row">
 	<div class="large-12 columns">
 		<h1 class="my-title"><%= title_or_not @move_my_post %></h1>
+		<h6>
+			<a class="button tiny secondary radius" href="#" data-reveal-id="original-text-modal">Post Text</a>
+			<a class="button tiny secondary radius" href="#" data-reveal-id="instructions-modal">Instructions</a> 
+			<% @rest_of_games.each do |game| %>
+				<%= link_to "#{game.name}!", posts_game_path( @move_my_post, game.slug ), class: "button tiny secondary radius" %>
+				<!-- <a class="" href="#"><%= game.name %></a></h6> -->
+			<% end %>
 		<h5 class="subheader">You may have been moved by <%= name_or_email @move_my_post.user %>'s words. Why not move them back?</h5>
 	</div>	
 </div>

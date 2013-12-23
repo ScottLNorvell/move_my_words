@@ -168,6 +168,8 @@ mmw.updateText = function() {
       .style("stroke", "black")
       .style("stroke-width", "1px")
       .style("cursor", "pointer")
+      // Attempting to make font-size more responsive. possibly not done!
+      .style("font-size", (mmw.WIDTH/480) + "em")
       // Sets ID param
       .attr("id", function(d,i) { return "text-" + i; })
       // make sure text is anchored in the middle of node

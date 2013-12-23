@@ -13,9 +13,6 @@
     <ul class="left">
       <li class="divider hide-for-small"></li>
       <li><a href="#" data-reveal-id="about-modal" >About</a></li>
-      <% if @game.present? %>
-      <li><a href="#" data-reveal-id="instructions-modal" ><%= @game.name %> Instructions</a></li>
-      <% end %>
       <li><%= link_to "Users", users_path %></li>
     </ul><!-- End Left Nav Section -->
 
