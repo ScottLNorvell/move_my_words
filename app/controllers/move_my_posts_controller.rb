@@ -3,6 +3,7 @@ class MoveMyPostsController < ApplicationController
 	def show
 		@move_my_post = MoveMyPost.find params[:id]
 		@new_move_my_post = MoveMyPost.new
+		@rest_of_games = Game.where "slug != '#{params[:game]}'"
 		@game = Game.find_by_slug params[:game]
 		unless user_signed_in?
 			@new_user = User.new

@@ -56,6 +56,12 @@
 
     <% end %>
 
+    <% if @move_my_post.present? %>
+    
+    <%= render 'layouts/original_text_modal' %>
+
+    <% end %>
+
     <%= render 'layouts/confirm_modal' %>
     
     <%= javascript_include_tag "application" %>

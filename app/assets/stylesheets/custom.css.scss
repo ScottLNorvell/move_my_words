@@ -5,6 +5,7 @@ body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	margin-bottom: 4em;
 }
 
 #word-block {
@@ -30,3 +31,8 @@ text {
 	user-select: none;
 }
 
+.my-title {
+	margin: {
+		bottom: 0px;
+	}
+}
