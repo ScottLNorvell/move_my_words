@@ -61,7 +61,7 @@ $(function() {
       if ($('.user-name').length > 0) {
 
         $('#move-my-post-list').prepend(data.html);
-
+        setDeleteButtons();
         // restart the vis with new method!
         mmw.reStart('Post Created!');
 
@@ -80,7 +80,7 @@ $(function() {
     e.preventDefault();
     var self = $(this);
     var url = self.attr('action')
-    $.ajax(url,{
+    $.ajax(url, {
       data: self.serialize(),
       type: "PUT"
     }).done(function(data) {
@@ -93,24 +93,49 @@ $(function() {
     });
   });
 
-  $('.delete-mmp').click(function(e) {
-    e.preventDefault();
-    var self = $(this);
-    var mmp_div = self.closest('div');
-    // add modal for confirmation!
+  setDeleteButtons();
+
+  $('#confirm-no').on('click', function(e) {
+    $('#confirm-modal').foundation('reveal', 'close');
+  });
+
+  $('#confirm-yes').on('click', function(e) {
     $.ajax({
-      url: self.attr('href'),
+      url: $('#confirm-container').data('url'),
       type: 'DELETE'
     }).done(function(data) {
-      console.log(data);
-      mmp_div.remove();
-    })
-  })
+      // console.log(data);
+      $('#mmp-' + data.id).remove();
+      $('#confirm-modal').foundation('reveal', 'close');
+    });
+  });
 
 });
+
+function setDeleteButtons() {
+  $('.delete-mmp').off('click');
+  $('.delete-mmp').on('click', function(e) {
+    var self = $(this);
+    showConfirm(e, self);
+  });
+}
+
 
 // brings in old school modal form!
 function bringInForm() {
   $('#move-my-post-content').val(mmw.new_move_my_post);
   $('#old-school-modal').foundation('reveal', 'open');
+}
+
+function showConfirm(e, self) {
+  e.preventDefault();
+  var mmp_div = self.closest('div').clone();
+  var confirm_container = $('#confirm-container');
+  mmp_div.find('.delete-mmp').remove();
+  confirm_container.data({
+    url: self.attr('href') 
+  });
+  confirm_container.html(mmp_div.find('h4'));
+  confirm_container.append(mmp_div.find('blockquote'));
+  $('#confirm-modal').foundation('reveal', 'open');
 }
