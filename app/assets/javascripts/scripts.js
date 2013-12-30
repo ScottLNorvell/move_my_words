@@ -5,11 +5,11 @@ $(function() {
   mmw.initialize(game);
 
   // *** For making mmw.svg responsive ***
-  // $(window).resize(function() {
-  //   if (mmw.WIDTH != $('#word-block').width()) {
-  //     console.log('resized!')
-  //   }
-  // });
+  $(window).resize(function() {
+    if (mmw.WIDTH != $('#word-block').width()) {
+      console.log('resized!')
+    }
+  });
 
   // push words into vis as they are typed
   // (either by pressing enter [13] or space [32])

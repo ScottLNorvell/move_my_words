@@ -67,7 +67,7 @@ mmw.reStart = function(new_placeholder, game) {
 
 // sets the force for MOST of the games
 mmw.makeStandardForce = function() {
-  this.links = 
+  // this.links = 
   this.force = d3.layout.force()
     .charge(-30)
     .nodes(mmw.nodes)
