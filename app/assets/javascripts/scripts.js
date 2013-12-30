@@ -7,7 +7,10 @@ $(function() {
   // *** For making mmw.svg responsive ***
   $(window).resize(function() {
     if (mmw.WIDTH != $('#word-block').width()) {
-      console.log('resized!')
+      // clear timeout
+      clearTimeout(mmw.resizeTimer);
+      // Wait till we're done to only call once
+      mmw.resizeTimer = setTimeout(mmw.reStart, 100);
     }
   });
 

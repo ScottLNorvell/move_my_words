@@ -4,6 +4,7 @@ mmw.new_move_my_post = "";
 mmw.placeholder = placeholder_text;
 mmw.move_my_post = move_my_post;
 mmw.nodes = mmw.nodes || [];
+mmw.tmp = {};
 
 // Set basic params!
 mmw.initialize = function(game) {
@@ -38,7 +39,7 @@ mmw.fridge_magnets = function() {
 mmw.web_words = function() {
   this.makeWebForce();
   mmw.svg.on('mousedown', mmw.mouseDownAgitation);
-  this.makeLinks = makeLinks;
+  this.makeLinks = mmw.tmp.makeWebWordsLinks;
   setTimeout(function() {
     mmw.animateMessage(mmw.move_my_post);
   }, 100);
@@ -53,6 +54,9 @@ mmw.reStart = function(new_placeholder, game) {
   mmw.svg.remove();
   // clear out the nodes!
   mmw.nodes = [];
+  // reset makeLinks functions
+  mmw.makeLinks = undefined;
+
   // reset placeholder if applicable
   if (new_placeholder) {
     mmw.placeholder = new_placeholder;
@@ -141,6 +145,7 @@ mmw.pushNode = function(name, placeholder) {
     placeholder: placeholder || 'n'
   });
 
+  // update links if applicable
   if (mmw.makeLinks) {
     mmw.links = mmw.makeLinks();
     mmw.updateLinks();
@@ -216,7 +221,7 @@ mmw.mouseDownAgitation = function() {
 }
 
 // makes the links for web words!
-makeLinks = function() {
+mmw.tmp.makeWebWordsLinks = function() {
   var links = [],
       length = mmw.nodes.length,
       width = Math.ceil(Math.sqrt(length)),
